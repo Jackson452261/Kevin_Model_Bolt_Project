@@ -36,7 +36,7 @@ export default function Featured() {
   };
 
   return (
-    <section id="featured" className="py-24 px-4 bg-white">
+    <section id="travel" className="py-24 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light mb-4 text-gray-900">

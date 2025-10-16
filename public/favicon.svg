@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="4" fill="#1f2937"/>
+  <!-- Camera icon -->
+  <g transform="translate(6, 8)">
+    <rect x="2" y="4" width="16" height="12" rx="2" stroke="#f9fafb" stroke-width="1.5" fill="none"/>
+    <circle cx="10" cy="10" r="3" stroke="#f9fafb" stroke-width="1.5" fill="none"/>
+    <rect x="6" y="2" width="8" height="2" rx="1" fill="#f9fafb"/>
+    <circle cx="15" cy="6" r="1" fill="#f9fafb"/>
+  </g>
+  <!-- Small "K" text -->
+  <text x="24" y="28" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#f9fafb">K</text>
+</svg>
