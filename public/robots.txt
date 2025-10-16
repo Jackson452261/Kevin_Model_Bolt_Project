@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://your-domain.com/sitemap.xml
+
+# Disallow crawling of development files
+Disallow: /src/
+Disallow: /*.tsx
+Disallow: /*.ts
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/
+
+# Allow important static files
+Allow: /favicon.svg
+Allow: /sitemap.xml
+Allow: /*.css
+Allow: /*.js
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
