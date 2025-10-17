@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://kevinphotowebsite.netlify.app/sitemap.xml
 
 # Disallow crawling of development files
 Disallow: /src/
