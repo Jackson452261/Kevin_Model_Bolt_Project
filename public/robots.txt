@@ -4,17 +4,27 @@ Allow: /
 # Sitemap location
 Sitemap: https://kevinphotowebsite.netlify.app/sitemap.xml
 
-# Disallow crawling of development files
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Disallow crawling of development and system files
 Disallow: /src/
 Disallow: /*.tsx
 Disallow: /*.ts
 Disallow: /node_modules/
 Disallow: /.git/
 Disallow: /dist/
+Disallow: /.env
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /*.config.js
+Disallow: /*.config.ts
+Disallow: /tsconfig*.json
 
-# Allow important static files
+# Allow important static files and assets
 Allow: /favicon.svg
 Allow: /sitemap.xml
+Allow: /robots.txt
 Allow: /*.css
 Allow: /*.js
 Allow: /*.jpg
@@ -23,3 +33,22 @@ Allow: /*.png
 Allow: /*.gif
 Allow: /*.svg
 Allow: /*.webp
+Allow: /*.avif
+Allow: /*.ico
+
+# Allow specific photography-related paths
+Allow: /gallery/
+Allow: /portfolio/
+Allow: /images/
+Allow: /photos/
+Allow: /assets/
+
+# Block common bot patterns that might waste crawl budget
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
