@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import Carousel from './Carousel';
+// Removed lightbox functionality
 
 const galleryImages = [
   'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946769/samples/IMG_5639_nsm0fm.jpg',
   'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946769/samples/IMG_5651_qrfplg.jpg',
   'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946769/samples/IMG_5650_mn7atp.jpg',
   'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946769/samples/IMG_5638_klnrak.jpg',
-  'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946769/samples/IMG_5637_w0pcb7.jpg ',
+  'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946769/samples/IMG_5637_w0pcb7.jpg',
   'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946769/samples/IMG_5640_rd3pvb.jpg',
   'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946770/samples/IMG_5652_otmtuy.jpg',
   'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946771/samples/IMG_5642_lldrux.jpg',
@@ -69,7 +68,6 @@ const galleryImages = [
 ];
 
 export default function Gallery() {
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
   return (
     <section id="model" className="py-24 px-4 bg-gray-50">
@@ -83,12 +81,11 @@ export default function Gallery() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {galleryImages.map((image, index) => (
             <div
               key={index}
-              onClick={() => setSelectedImageIndex(index)}
-              className="relative aspect-square overflow-hidden bg-gray-200 cursor-pointer group"
+              className="relative aspect-square overflow-hidden bg-gray-200 group"
             >
               <img
                 src={image}
@@ -102,13 +99,6 @@ export default function Gallery() {
         </div>
       </div>
 
-      {selectedImageIndex !== null && (
-        <Carousel
-          images={galleryImages}
-          initialIndex={selectedImageIndex}
-          onClose={() => setSelectedImageIndex(null)}
-        />
-      )}
     </section>
   );
 }

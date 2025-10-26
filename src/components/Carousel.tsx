@@ -52,7 +52,7 @@ export default function Carousel({ images, initialIndex, onClose }: CarouselProp
   };
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center" style={{ zIndex: 9999 }}>
+    <div className="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center" style={{ zIndex: 9999 }}>
       <button
         onClick={onClose}
         className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors p-2 z-10"
@@ -77,11 +77,18 @@ export default function Carousel({ images, initialIndex, onClose }: CarouselProp
         <ChevronRight className="w-12 h-12" />
       </button>
 
-      <div className="relative w-full h-full flex items-center justify-center px-16 py-8">
+      <div className="absolute inset-0 flex items-center justify-center p-4">
         <img
           src={images[currentIndex]}
           alt={`Gallery image ${currentIndex + 1}`}
-          className="max-w-full max-h-full object-contain"
+          className="max-w-[90vw] max-h-[90vh] object-contain"
+          onError={(e) => {
+            console.error('Image failed to load:', images[currentIndex]);
+            e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vdCBmb3VuZDwvdGV4dD48L3N2Zz4=';
+          }}
+          onLoad={() => {
+            console.log('Image loaded successfully:', images[currentIndex]);
+          }}
         />
       </div>
 
