@@ -93,6 +93,23 @@
    
   </head>
   <body>
+    <script>
+      // Immediately restore scrolling on page load
+      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = 'unset';
+      
+      // Also restore on DOM content loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        document.body.style.overflow = 'unset';
+        document.documentElement.style.overflow = 'unset';
+      });
+      
+      // Restore on window load as well
+      window.addEventListener('load', function() {
+        document.body.style.overflow = 'unset';
+        document.documentElement.style.overflow = 'unset';
+      });
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

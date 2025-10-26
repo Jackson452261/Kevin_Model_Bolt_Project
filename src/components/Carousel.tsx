@@ -21,14 +21,27 @@ export default function Carousel({ images, initialIndex, onClose }: CarouselProp
       if (e.key === 'ArrowRight') goToNext();
     };
 
+    // Store original overflow values
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+
     window.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'unset';
+      // Force restore scrolling
+      document.body.style.overflow = originalBodyOverflow || 'unset';
+      document.documentElement.style.overflow = originalHtmlOverflow || 'unset';
+      
+      // Double-check with a timeout
+      setTimeout(() => {
+        document.body.style.overflow = 'unset';
+        document.documentElement.style.overflow = 'unset';
+      }, 100);
     };
-  }, [currentIndex]);
+  }, [onClose]);
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -39,7 +52,7 @@ export default function Carousel({ images, initialIndex, onClose }: CarouselProp
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center">
+    <div className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center" style={{ zIndex: 9999 }}>
       <button
         onClick={onClose}
         className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors p-2 z-10"

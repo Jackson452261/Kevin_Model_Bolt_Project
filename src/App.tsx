@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Gallery from './components/Gallery';
@@ -9,6 +10,10 @@ import ScrollProgress from './components/ScrollProgress';
 import './styles/smooth-scroll.css';
 
 function App() {
+  // Ensure scroll is always enabled when App mounts
+  useEffect(() => {
+    document.body.style.overflow = 'unset';
+  }, []);
   return (
     <div className="min-h-screen scroll-smooth">
       <ScrollProgress />
