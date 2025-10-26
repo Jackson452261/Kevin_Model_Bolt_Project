@@ -1,6 +1,9 @@
-// Removed lightbox functionality
+import { useState } from 'react';
+import PhotoAlbum from 'react-photo-album';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 
-const galleryImages = [
+const imageUrls = [
   'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946769/samples/IMG_5639_nsm0fm.jpg',
   'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946769/samples/IMG_5651_qrfplg.jpg',
   'https://res.cloudinary.com/dtbj43yha/image/upload/v1736946769/samples/IMG_5650_mn7atp.jpg',
@@ -67,7 +70,16 @@ const galleryImages = [
   "https://res.cloudinary.com/dtbj43yha/image/upload/v1736948224/2024%E6%97%A5%E6%9C%ACmotogp/IMG_1877_gzudw1.jpg"
 ];
 
+// Transform URLs to photo album format
+const photos = imageUrls.map((src, index) => ({
+  src,
+  width: 800,
+  height: 600,
+  alt: `Gallery image ${index + 1}`
+}));
+
 export default function Gallery() {
+  const [index, setIndex] = useState(-1);
 
   return (
     <section id="model" className="py-24 px-4 bg-gray-50">
@@ -81,24 +93,20 @@ export default function Gallery() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {galleryImages.map((image, index) => (
-            <div
-              key={index}
-              className="relative aspect-square overflow-hidden bg-gray-200 group"
-            >
-              <img
-                src={image}
-                alt={`Gallery image ${index + 1}`}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300"></div>
-            </div>
-          ))}
-        </div>
+        <PhotoAlbum
+          photos={photos}
+          layout="masonry"
+          targetRowHeight={300}
+          onClick={({ index }) => setIndex(index)}
+        />
+        
+        <Lightbox
+          open={index >= 0}
+          index={index}
+          close={() => setIndex(-1)}
+          slides={photos}
+        />
       </div>
-
     </section>
   );
 }
