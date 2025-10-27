@@ -32,7 +32,7 @@ export default function Footer() {
             <h3 className="font-normal text-lg mb-4">Follow Us</h3>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.instagram.com/a411757"
                 className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
                 aria-label="Instagram"
               >
