@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PhotoAlbum from 'react-photo-album';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
@@ -81,6 +81,44 @@ const photos = imageUrls.map((src, index) => ({
 export default function Gallery() {
   const [index, setIndex] = useState(-1);
 
+  // Disable right-click context menu and other image protection methods
+  useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+      return false;
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Disable F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.key === 'u') ||
+        (e.ctrlKey && e.key === 's')
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    };
+
+    const handleDragStart = (e: DragEvent) => {
+      e.preventDefault();
+      return false;
+    };
+
+    // Add event listeners
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('dragstart', handleDragStart);
+
+    // Cleanup event listeners
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('dragstart', handleDragStart);
+    };
+  }, []);
+
   return (
     <section id="model" className="py-24 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
@@ -93,12 +131,44 @@ export default function Gallery() {
           </p>
         </div>
 
-        <PhotoAlbum
-          photos={photos}
-          layout="masonry"
-          targetRowHeight={300}
-          onClick={({ index }) => setIndex(index)}
-        />
+        <div 
+          className="select-none"
+          style={{
+            userSelect: 'none',
+            WebkitUserSelect: 'none',
+            MozUserSelect: 'none',
+            msUserSelect: 'none',
+            WebkitTouchCallout: 'none',
+            WebkitUserDrag: 'none',
+            KhtmlUserSelect: 'none'
+          }}
+        >
+          <PhotoAlbum
+            photos={photos}
+            layout="masonry"
+            targetRowHeight={300}
+            onClick={({ index }) => setIndex(index)}
+            renderPhoto={({ photo, imageProps }) => (
+              <img
+                {...imageProps}
+                style={{
+                  ...imageProps.style,
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
+                  MozUserSelect: 'none',
+                  msUserSelect: 'none',
+                  WebkitTouchCallout: 'none',
+                  WebkitUserDrag: 'none',
+                  KhtmlUserSelect: 'none',
+                  pointerEvents: 'auto'
+                }}
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                draggable={false}
+              />
+            )}
+          />
+        </div>
         
         <Lightbox
           open={index >= 0}
